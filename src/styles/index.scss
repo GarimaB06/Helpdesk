@@ -1,0 +1,100 @@
+@import "variables";
+@import "mixins";
+@import "keyframes";
+
+:root {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	color-scheme: light dark;
+	background-color: #242424;
+
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
+}
+
+button {
+	margin: 0.8rem;
+	width: 10rem;
+	height: 3rem;
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #1a1a1a;
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
+
+button:hover {
+	border-color: $border-blue;
+}
+
+button:focus,
+button:focus-visible {
+	outline: 4px auto -webkit-focus-ring-color;
+}
+
+.cl-rootBox {
+	border-radius: 0.5rem;
+	margin: 2rem;
+	box-shadow: $border-blue 0px 0px 3px;
+}
+
+.cl-card {
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	color: white;
+	background-color: #121212;
+
+	.cl-headerTitle {
+		color: white;
+		font-weight: 300;
+		font-size: large;
+	}
+
+	.cl-headerSubtitle {
+		color: $text-blue;
+		font-weight: 600;
+	}
+}
+
+.cl-formFieldLabel__identifier-field,
+.cl-identityPreviewText,
+.cl-identityPreviewEditButtonIcon,
+.cl-formFieldLabel {
+	color: white;
+	margin-left: 10px;
+	font-weight: 600;
+}
+
+.cl-footer,
+.cl-footerAction {
+	background: #121212;
+}
+
+.cl-footerActionText,
+.cl-footerActionLink {
+	color: $text-blue;
+}
+
+.cl-formFieldInputShowPasswordButton {
+	width: 30px;
+	padding: 0;
+	margin: 0;
+	border: none;
+}

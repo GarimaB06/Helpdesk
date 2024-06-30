@@ -1,0 +1,295 @@
+@import "variables";
+@import "mixins";
+@import "keyframes";
+
+.App {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 1rem;
+}
+
+.title {
+	color: white;
+	font-weight: 300;
+	font-size: xxx-large;
+	margin: 3.5rem;
+}
+
+.subheading {
+	color: white;
+	font-size: x-large;
+	font-weight: 300;
+	margin-top: 3rem;
+	margin-bottom: 2.5rem;
+}
+
+.text {
+	color: $text-blue;
+	font-size: small;
+	margin-top: 0;
+	margin-bottom: 1rem;
+	font-weight: 600;
+}
+
+.loader {
+	@include flex-center;
+	height: 100vh;
+}
+
+.options-picker {
+	display: flex;
+	position: relative;
+	width: 500px;
+	border-radius: 25px;
+	background-color: black;
+	overflow: hidden;
+	cursor: pointer;
+	@include box-shadow($border-blue);
+
+	.option {
+		flex: 1;
+		text-align: center;
+		padding: 12px;
+		z-index: 1;
+		color: $title-blue;
+		transition: color 0.3s;
+		font-size: large;
+
+		&.selected {
+			color: white;
+		}
+	}
+
+	.slider {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		width: 50%;
+		background-color: $title-blue;
+		border-radius: 25px;
+		transition: transform 0.6s;
+		z-index: 0;
+
+		&.customer {
+			transform: translateX(0%);
+		}
+
+		&.admin {
+			transform: translateX(100%);
+		}
+	}
+}
+
+.login-input-feild,
+.input-feild,
+.text-area {
+	padding: 1.2rem;
+	margin: 0.5rem;
+	border: none;
+	border-radius: 1rem;
+	@include box-shadow($border-blue);
+}
+
+.login-input-feild {
+	width: 20rem;
+}
+
+.input-feild {
+	width: 40rem;
+
+	&::placeholder {
+		color: white;
+	}
+}
+
+.text-area {
+	width: 40rem;
+	height: 10rem;
+
+	&::placeholder {
+		color: white;
+		font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	}
+}
+
+.flex-parent-container,
+.login-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-form {
+	height: auto;
+}
+
+.link {
+	text-decoration: underline;
+	margin-top: 1rem;
+}
+
+.list-container {
+	border-radius: 0.5rem;
+	width: 80%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 10px;
+	background: #121212;
+
+	&.admin-list {
+		margin-top: 10rem;
+	}
+}
+
+.heading-wrapper {
+	background: #242424;
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 2;
+
+	.admin-panel-heading {
+		align-items: center;
+		background: #121212;
+		border-radius: 0.5rem;
+		box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 10px;
+		color: white;
+		display: flex;
+		flex-direction: column;
+		font-size: x-large;
+		font-weight: 300;
+		height: auto;
+		justify-content: flex-start;
+		padding: 2rem 0;
+		width: 80%;
+		margin-bottom: 0;
+	}
+}
+
+.label {
+	font-weight: 600;
+	color: $text-blue;
+	font-size: 1rem;
+}
+
+.ticket-list {
+	width: 100%;
+	margin: 0;
+	padding: 0;
+
+	.ticket {
+		position: relative;
+		border-radius: 0.5rem;
+		margin: 1rem;
+		background: #17181a;
+		@include box-shadow($border-blue);
+		padding: 1rem;
+		color: white;
+		list-style-type: none;
+
+		.ticket-content {
+			color: white;
+			font-size: small;
+			word-break: break-word;
+		}
+
+		.ticket-header {
+			position: relative;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+
+			.ticket-status {
+				right: 0;
+				position: absolute;
+				display: flex;
+				height: fit-content;
+
+				.status-editing-button {
+					align-items: center;
+					background: #121212;
+					border-radius: 50%;
+					display: flex;
+					height: 38px;
+					justify-content: center;
+					margin: 0;
+					padding: 0;
+					width: 38px;
+				}
+			}
+		}
+	}
+
+	.comment {
+		margin-bottom: 18px;
+		.date {
+			color: $secondary-text;
+			margin-top: 0;
+		}
+	}
+
+	.comment-form {
+		position: relative;
+
+		.comment-text-area {
+			min-height: 70px;
+			width: calc(100% - 32px);
+			resize: vertical;
+			background: $secondary-bg;
+		}
+
+		button {
+			align-items: center;
+			border-radius: 50%;
+			display: flex;
+			height: 36px;
+			width: 36px;
+			justify-content: center;
+			padding: 0;
+			position: absolute;
+			right: 0px;
+			bottom: 0px;
+		}
+	}
+
+	.comment,
+	.comment-text-area {
+		padding: 16px;
+		background: $secondary-bg;
+		border-radius: 5px;
+	}
+}
+
+.reset-link {
+	color: $text-blue;
+	margin: 0.5rem;
+	cursor: pointer;
+	padding: 1rem;
+	border-radius: 1rem;
+}
+
+.scroll-for-more {
+	margin: 1rem;
+	color: $text-blue;
+	font-size: small;
+	font-weight: 600;
+}
+
+.scroll-down {
+	transform: translateY(10px);
+	animation: bounce 2.5s infinite;
+	margin-top: 1.5rem;
+}
+
+.issues-feed {
+	padding-bottom: 4rem;
+	margin-bottom: 5rem;
+}
