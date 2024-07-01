@@ -1,6 +1,6 @@
 # Helpdesk - A Simple React app for ticket submission &amp; admin panel
 
-### Varcel Demo
+### Vercel Demo
 
 Click the link to preview -> https://helpdesk-three-pi.vercel.app/
 
