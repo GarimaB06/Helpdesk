@@ -45,7 +45,14 @@ export const DOWN_SVG = (
 	</svg>
 );
 
-export const customStyles = {
+import { StylesConfig } from "react-select";
+
+type OptionType = {
+	label: string;
+	value: string;
+};
+
+export const customStyles: StylesConfig<OptionType, false> = {
 	control: (provided, state) => ({
 		...provided,
 		backgroundColor: "#121212",
@@ -67,21 +74,21 @@ export const customStyles = {
 		display: "flex",
 		alignItems: "center",
 	}),
-	singleValue: (provided, state) => ({
+	singleValue: (provided) => ({
 		...provided,
 		color: "white",
 		display: "flex",
 		alignItems: "center",
 	}),
-	menu: (provided, state) => ({
+	menu: (provided) => ({
 		...provided,
 		backgroundColor: "#121212",
 	}),
-	input: (provided, state) => ({
+	input: (provided) => ({
 		...provided,
 		color: "white",
 	}),
-	placeholder: (provided, state) => ({
+	placeholder: (provided) => ({
 		...provided,
 		color: "grey",
 	}),
