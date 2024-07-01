@@ -22,6 +22,10 @@ Click the link to preview -> https://helpdesk-three-pi.vercel.app/
    - **Detailed Ticket View**: Drill into each ticket to add comments.
    - **Delete Tickets**: Admins can delete tickets as needed.
 
+### Tech Stack
+
+React, Typescript, Clerk authentication, MongoDB, Express.js, Frontend deployed with Varcel, Backend built and deployed with Render. 
+
 #### Installation - Run the project locally
 
 1. **Clone the Repository**:
