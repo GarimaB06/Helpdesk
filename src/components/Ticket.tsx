@@ -1,7 +1,12 @@
-import React, { FC, useState } from "react";
+//@ts-ignore
+
+import React, { FC, ReactNode, useState } from "react";
 import Select from "react-select";
+import { StylesConfig } from "react-select";
+
 import { customStyles } from "./Constants";
 import { IssueTicket } from "./TicketList";
+
 import {
 	EDIT_SVG,
 	NEW_SVG,
@@ -11,6 +16,11 @@ import {
 	DELETE_SVG,
 	UP_SVG,
 } from "./Constants";
+
+type OptionType = {
+	label: string;
+	value: string;
+};
 
 interface TicketProps {
 	ticket: IssueTicket;
@@ -24,7 +34,13 @@ const statusOptions = [
 	{ value: "resolved", label: "Resolved", icon: RESOLVED_SVG },
 ];
 
-const formatOptionLabel = ({ label, icon }) => (
+const formatOptionLabel = ({
+	label,
+	icon,
+}: {
+	label: string;
+	icon: ReactNode;
+}) => (
 	<div style={{ display: "flex", alignItems: "center" }}>
 		{icon}
 		<span style={{ marginLeft: 8 }}>{label}</span>
@@ -48,7 +64,7 @@ const Ticket: FC<TicketProps> = ({ ticket, setTickets, isAdmin }) => {
 			if (!response.ok) {
 				throw new Error(`Failed to add status`);
 			}
-			const updatedStatus = await response.json();
+			await response.json();
 			setStatus(selectedStatus);
 		} catch (error) {
 			console.error(`Error occured while updating status ${error}`);
@@ -83,7 +99,7 @@ const Ticket: FC<TicketProps> = ({ ticket, setTickets, isAdmin }) => {
 				)
 			);
 			setCommentText("");
-		} catch (error) {
+		} catch (error: any) {
 			console.error(`Error adding comment: ${error.message}`);
 		}
 	};
@@ -108,7 +124,7 @@ const Ticket: FC<TicketProps> = ({ ticket, setTickets, isAdmin }) => {
 		}
 	};
 
-	const selectorCaretStyles = {
+	const selectorCaretStyles: StylesConfig<OptionType, false> = {
 		dropdownIndicator: (provided) => ({
 			...provided,
 			visibility: statusBeingEdited ? "visible" : "hidden",
