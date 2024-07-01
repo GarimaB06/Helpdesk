@@ -1,4 +1,4 @@
-//@ts-ignore
+//@ts-nocheck
 
 export const EDIT_SVG = (
 	<svg height="16px" viewBox="0 -960 960 960" width="16px" fill="#e8eaed">

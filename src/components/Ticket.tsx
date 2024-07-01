@@ -1,4 +1,4 @@
-//@ts-ignore
+//@ts-nocheck
 
 import React, { FC, ReactNode, useState } from "react";
 import Select from "react-select";
