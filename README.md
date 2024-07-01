@@ -4,6 +4,14 @@
 
 Click the link to preview -> https://helpdesk-three-pi.vercel.app/
 
+
+
+https://github.com/GarimaB06/Helpdesk/assets/68969765/a5a54921-e34a-4183-a31f-05ba12c6d832
+
+
+
+
+
 ### Features
 
 1. **Toggle Between Customer View and Admin View**:
