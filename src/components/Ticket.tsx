@@ -15,6 +15,7 @@ import {
 	DONE_SVG,
 	DELETE_SVG,
 	UP_SVG,
+	BASE_URL,
 } from "./Constants";
 
 type OptionType = {
@@ -54,7 +55,7 @@ const Ticket: FC<TicketProps> = ({ ticket, setTickets, isAdmin }) => {
 
 	const handleUpdateStatus = async (_id: any, selectedStatus: string) => {
 		try {
-			const response = await fetch(`http://localhost:5001/api/tickets/${_id}`, {
+			const response = await fetch(`${BASE_URL}/api/tickets/${_id}`, {
 				method: "PATCH",
 				headers: {
 					"Content-type": "application/json",
@@ -77,7 +78,7 @@ const Ticket: FC<TicketProps> = ({ ticket, setTickets, isAdmin }) => {
 	) => {
 		e.preventDefault();
 		try {
-			const response = await fetch(`http://localhost:5001/api/tickets/${_id}`, {
+			const response = await fetch(`${BASE_URL}/api/tickets/${_id}`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -106,7 +107,7 @@ const Ticket: FC<TicketProps> = ({ ticket, setTickets, isAdmin }) => {
 
 	const handleDeleteTicket = async (_id: any) => {
 		try {
-			const response = await fetch(`http://localhost:5001/api/tickets/${_id}`, {
+			const response = await fetch(`${BASE_URL}/api/tickets/${_id}`, {
 				method: "DELETE",
 				headers: {
 					"content-type": "application/json",

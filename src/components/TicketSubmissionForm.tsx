@@ -5,7 +5,7 @@ import React, {
 	Dispatch,
 	SetStateAction,
 } from "react";
-import { DOWN_SVG } from "./Constants";
+import { DOWN_SVG, BASE_URL } from "./Constants";
 
 interface FormData {
 	name: string;
@@ -41,7 +41,7 @@ const TicketSubmissionForm: React.FC<Props> = ({
 	const handleSubmit = async (event: FormEvent) => {
 		event.preventDefault();
 		try {
-			const response = await fetch("http://localhost:5001/api/tickets", {
+			const response = await fetch(`${BASE_URL}/api/tickets`, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

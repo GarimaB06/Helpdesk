@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SignOutButton } from "@clerk/clerk-react";
 import Ticket from "./Ticket";
+import { BASE_URL } from "./Constants";
 
 export interface CommentTypes {
 	user: string;
@@ -28,7 +29,7 @@ const TicketList: React.FC<Props> = ({ isAdmin, refresh }) => {
 	useEffect(() => {
 		const fetchTickets = async () => {
 			try {
-				const ticketsData = await fetch("http://localhost:5001/api/tickets");
+				const ticketsData = await fetch(`${BASE_URL}/api/tickets`);
 				const ticketsJson = await ticketsData.json();
 				setTickets(ticketsJson);
 			} catch (error) {
