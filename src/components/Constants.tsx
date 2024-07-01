@@ -1,7 +1,8 @@
 //@ts-nocheck
 
-export const BASE_URL =
-	import.meta.env.API_PROD_BASE_URL || "http://localhost:5001";
+const prodUrl = import.meta.env.VITE_API_PROD_BASE_URL;
+
+export const BASE_URL = prodUrl || "http://localhost:5001";
 
 export const EDIT_SVG = (
 	<svg height="16px" viewBox="0 -960 960 960" width="16px" fill="#e8eaed">
