@@ -1,5 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from "react";
-import { DOWN_SVG, BASE_URL } from "./Constants";
+import { BASE_URL } from "./Constants";
 import { FormData, Props } from "../types/ticketSubmissionFormTypes";
 
 const TicketSubmissionForm: React.FC<Props> = ({
