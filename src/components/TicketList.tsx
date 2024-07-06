@@ -2,28 +2,9 @@ import React, { useEffect, useState } from "react";
 import { SignOutButton } from "@clerk/clerk-react";
 import Ticket from "./Ticket";
 import { BASE_URL } from "./Constants";
+import { IssueTicket, TicketListProps } from "../types/ticketListTypes";
 
-export interface CommentTypes {
-	user: string;
-	text: string;
-	createdAt: Date;
-}
-
-export interface IssueTicket {
-	_id: string;
-	name: string;
-	email: string;
-	description: string;
-	status: string;
-	comments: CommentTypes[];
-}
-
-type Props = {
-	isAdmin?: boolean;
-	refresh?: boolean;
-};
-
-const TicketList: React.FC<Props> = ({ isAdmin, refresh }) => {
+const TicketList: React.FC<TicketListProps> = ({ isAdmin, refresh }) => {
 	const [tickets, setTickets] = useState<IssueTicket[]>([]);
 
 	useEffect(() => {

@@ -1,10 +1,6 @@
-import React, { SetStateAction, Dispatch } from "react";
+import React from "react";
 import { Options } from "../App";
-
-interface OptionsPickerProps {
-	selectedOption: string;
-	setSelectedOption: Dispatch<SetStateAction<Options>>;
-}
+import { OptionsPickerProps } from "../types/optionsPickerTypes";
 
 const OptionsPicker: React.FC<OptionsPickerProps> = ({
 	selectedOption,

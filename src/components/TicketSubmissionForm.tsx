@@ -1,22 +1,6 @@
-import React, {
-	useState,
-	ChangeEvent,
-	FormEvent,
-	Dispatch,
-	SetStateAction,
-} from "react";
+import React, { useState, ChangeEvent, FormEvent } from "react";
 import { DOWN_SVG, BASE_URL } from "./Constants";
-
-interface FormData {
-	name: string;
-	email: string;
-	description: string;
-}
-
-type Props = {
-	submissionToggled: boolean;
-	setSubmissionToggled: Dispatch<SetStateAction<boolean>>;
-};
+import { FormData, Props } from "../types/ticketSubmissionFormTypes";
 
 const TicketSubmissionForm: React.FC<Props> = ({
 	submissionToggled,
