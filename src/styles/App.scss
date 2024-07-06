@@ -1,3 +1,5 @@
+$layout-breakpoint-small: 725px;
+
 @import "variables";
 @import "mixins";
 @import "keyframes";
@@ -276,20 +278,62 @@
 	border-radius: 1rem;
 }
 
-.scroll-for-more {
-	margin: 1rem;
-	color: $text-blue;
-	font-size: small;
-	font-weight: 600;
-}
+@media (max-width: $layout-breakpoint-small) {
+	.App {
+		margin: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
 
-.scroll-down {
-	transform: translateY(10px);
-	animation: bounce 2.5s infinite;
-	margin-top: 1.5rem;
-}
+	.title {
+		font-size: x-large;
+		width: 80vw;
+		text-align: center;
+	}
 
-.issues-feed {
-	padding-bottom: 4rem;
-	margin-bottom: 5rem;
+	.subheading {
+		text-align: center;
+		font-size: large;
+		width: 80vw;
+		margin: 2vh 0;
+		padding: 0;
+	}
+
+	.text {
+		text-align: center;
+		margin-bottom: 2vh;
+		font-size: smaller;
+		width: 90vw;
+	}
+
+	.options-picker {
+		width: 90vw;
+	}
+
+	.login-input-feild,
+	.input-feild,
+	.text-area {
+		width: 80vw;
+		padding: 1.5vh;
+		margin: 1vh;
+	}
+
+	.list-container {
+		width: 100vw;
+		margin: 0;
+		&.admin-list {
+			margin-top: 11vh;
+		}
+	}
+
+	// .ticket-list .ticket .ticket-header .ticket-status {
+	// 	right: 1;
+	// }
+
+	.heading-wrapper .admin-panel-heading {
+		font-size: large;
+		width: 90vw;
+	}
 }

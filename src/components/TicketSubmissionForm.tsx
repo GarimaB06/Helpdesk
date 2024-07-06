@@ -102,8 +102,6 @@ const TicketSubmissionForm: React.FC<Props> = ({
 					</a>
 				</>
 			)}
-			<div className="scroll-for-more">Scroll for open issues</div>
-			<div className="scroll-down">{DOWN_SVG}</div>
 		</div>
 	);
 };
