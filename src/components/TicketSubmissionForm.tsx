@@ -1,22 +1,6 @@
-import React, {
-	useState,
-	ChangeEvent,
-	FormEvent,
-	Dispatch,
-	SetStateAction,
-} from "react";
-import { DOWN_SVG, BASE_URL } from "./Constants";
-
-interface FormData {
-	name: string;
-	email: string;
-	description: string;
-}
-
-type Props = {
-	submissionToggled: boolean;
-	setSubmissionToggled: Dispatch<SetStateAction<boolean>>;
-};
+import React, { useState, ChangeEvent, FormEvent } from "react";
+import { BASE_URL } from "./Constants";
+import { FormData, Props } from "../types/ticketSubmissionFormTypes";
 
 const TicketSubmissionForm: React.FC<Props> = ({
 	submissionToggled,
@@ -118,8 +102,6 @@ const TicketSubmissionForm: React.FC<Props> = ({
 					</a>
 				</>
 			)}
-			<div className="scroll-for-more">Scroll for open issues</div>
-			<div className="scroll-down">{DOWN_SVG}</div>
 		</div>
 	);
 };
