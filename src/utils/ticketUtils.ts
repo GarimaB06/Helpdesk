@@ -1,5 +1,4 @@
 import { BASE_URL } from "../components/Constants";
-import { IssueTicket } from "../types/ticketListTypes";
 
 export const handleUpdateStatus = async (
 	_id: string,
