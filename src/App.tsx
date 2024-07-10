@@ -11,11 +11,13 @@ import { Oval } from "react-loader-spinner";
 import OptionsPicker from "./components/OptionsPicker";
 import TicketList from "./components/TicketList";
 import CustomerView from "./components/CustomerView";
+import Ticket from "./components/Ticket"; // Import the Ticket component
 
 export type Options = "admin" | "customer";
 
 const App: React.FC = () => {
 	const [selectedOption, setSelectedOption] = useState<Options>("customer");
+
 	const { isSignedIn, isLoaded } = useUser();
 
 	if (!isLoaded) {
@@ -70,6 +72,7 @@ const App: React.FC = () => {
 						path="/admin-panel"
 						element={!isSignedIn ? <Navigate to="/" /> : <TicketList isAdmin />}
 					/>
+					<Route path="/tickets/:id" element={<Ticket isAdmin />} />
 				</Routes>
 			</div>
 		</Router>

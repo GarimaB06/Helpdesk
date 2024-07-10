@@ -81,7 +81,7 @@ const TicketSubmissionForm: React.FC<Props> = ({
 						required
 					></textarea>
 				</div>
-				<button type="submit" aria-label="Submit">
+				<button type="submit" aria-label="Submit" className="primary-button">
 					{submitted ? "Submitted" : "Submit"}
 				</button>
 			</form>

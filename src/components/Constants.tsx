@@ -1,6 +1,6 @@
 //@ts-nocheck
 export const EDIT_SVG = (
-	<svg height="16px" viewBox="0 -960 960 960" width="16px" fill="#e8eaed">
+	<svg height="19px" viewBox="0 -960 960 960" width="19px" fill="#e8eaed">
 		<path d="M192.63-192.63h42.2l449.32-448.94-42.17-42.17-449.35 448.88v42.23Zm-47.89 47.89v-109.61l546.7-547.21q6.68-5.87 15.46-9.58 8.78-3.7 18.48-3.7 9.23 0 18.03 3.49 8.81 3.5 16.42 9.99l42.14 42.37q6.57 6.86 9.93 15.81 3.36 8.96 3.36 17.74 0 9.75-3.45 18.62-3.45 8.87-9.87 15.53L254.35-144.74H144.74Zm622.61-581.07-41.13-40.87 41.13 40.87ZM663.07-662.4l-21.09-21.34 42.17 42.17-21.08-20.83Z" />
 	</svg>
 );
@@ -46,6 +46,12 @@ export const DOWN_SVG = (
 	</svg>
 );
 
+export const UNFOLD = (
+	<svg height="20px" viewBox="0 -960 960 960" width="20px" fill="#e8eaed">
+		<path d="M480-144 318-306l51-51 111 111 111-111 51 51-162 162ZM369-603l-51-51 162-162 162 162-51 51-111-111-111 111Z" />
+	</svg>
+);
+
 import { StylesConfig } from "react-select";
 
 const prodUrl = import.meta.env.VITE_API_PROD_BASE_URL;
@@ -80,18 +86,23 @@ export const customStyles: StylesConfig<OptionType, false> = {
 		color: "#646cff",
 		borderColor: state.isFocused ? "#646cff" : "#121212",
 		width: "fit-content",
-		minWidth: "175px",
+		minWidth: "160px",
+		maxWidth: "160px",
+		fontSize: "0.8rem",
 		"&:hover": {
 			borderColor: "#646cff",
 		},
 	}),
 	option: (provided, state) => ({
 		...provided,
+		minWidth: "160px",
+		fontSize: "0.8rem",
 		backgroundColor: state.isSelected ? "grey" : "#121212",
 		color: "white",
 		"&:hover": {
 			backgroundColor: "grey",
 		},
+
 		display: "flex",
 		alignItems: "center",
 	}),
@@ -103,7 +114,11 @@ export const customStyles: StylesConfig<OptionType, false> = {
 	}),
 	menu: (provided) => ({
 		...provided,
+		border: "1px solid #646cff",
+		maxWidth: "160px",
+		fontSize: "0.8rem",
 		backgroundColor: "#121212",
+		padding: "0",
 	}),
 	input: (provided) => ({
 		...provided,

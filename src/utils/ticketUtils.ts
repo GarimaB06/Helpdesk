@@ -24,15 +24,7 @@ export const handleUpdateStatus = async (
 	}
 };
 
-export const handleAddComment = async (
-	e: React.FormEvent<HTMLFormElement>,
-	_id: string,
-	commentText: string,
-	setTickets: React.Dispatch<React.SetStateAction<IssueTicket[]>>,
-	ticket: IssueTicket,
-	setCommentText: React.Dispatch<React.SetStateAction<string>>
-) => {
-	e.preventDefault();
+export const handleAddComment = async (_id: string, commentText: string) => {
 	try {
 		const response = await fetch(`${BASE_URL}/api/tickets/${_id}`, {
 			method: "PUT",
@@ -47,24 +39,13 @@ export const handleAddComment = async (
 				`Failed to add comment: ${response.status} ${response.statusText}`
 			);
 		}
-		const updatedTicket = await response.json();
-		setTickets((prevTickets) =>
-			prevTickets.map((t) =>
-				t._id === ticket._id
-					? { ...t, comments: updatedTicket.comments, status: ticket.status }
-					: t
-			)
-		);
-		setCommentText("");
+		return await response.json();
 	} catch (error: any) {
 		console.error(`Error adding comment: ${error.message}`);
 	}
 };
 
-export const handleDeleteTicket = async (
-	_id: string,
-	setTickets: React.Dispatch<React.SetStateAction<IssueTicket[]>>
-) => {
+export const handleDeleteTicket = async (_id: string) => {
 	try {
 		const response = await fetch(`${BASE_URL}/api/tickets/${_id}`, {
 			method: "DELETE",
@@ -73,9 +54,7 @@ export const handleDeleteTicket = async (
 			},
 		});
 		if (response.ok) {
-			setTickets((prevTickets) =>
-				prevTickets.filter((ticket) => ticket._id !== _id)
-			);
+			return await response.json();
 		} else {
 			console.error("Failed to delete ticket:", await response.json());
 		}

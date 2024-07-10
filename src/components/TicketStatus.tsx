@@ -1,6 +1,6 @@
 //@ts-nocheck
 
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import { StylesConfig } from "react-select";
 import {
@@ -12,37 +12,37 @@ import {
 	DELETE_SVG,
 } from "./Constants";
 import { IssueTicket, OptionType } from "../types/ticketListTypes";
+import Modal from "./Modal";
+import { UNFOLD } from "./Constants";
 
 interface TicketStatusProps {
-	statusBeingEdited: boolean;
-	status: string;
-	ticket: IssueTicket;
-	setTickets: React.Dispatch<React.SetStateAction<IssueTicket[]>>;
 	handleUpdateStatus: (
 		id: string,
 		selectedStatus: string,
 		setStatus: React.Dispatch<React.SetStateAction<string>>
 	) => void;
-	setStatusBeingEdited: React.Dispatch<React.SetStateAction<boolean>>;
-	handleDeleteTicket: (
-		id: string,
-		setTickets: React.Dispatch<React.SetStateAction<IssueTicket[]>>
-	) => void;
-	isAdmin: boolean;
+	handleDeleteTicket: () => void;
 	setStatus: React.Dispatch<React.SetStateAction<string>>;
+	setStatusBeingEdited: React.Dispatch<React.SetStateAction<boolean>>;
+	status: string;
+	statusBeingEdited: boolean;
+	ticket: IssueTicket;
 }
 
 const TicketStatus: React.FC<TicketStatusProps> = ({
 	statusBeingEdited,
 	status,
 	ticket,
-	setTickets,
+	handleDeleteTicket,
 	handleUpdateStatus,
 	setStatusBeingEdited,
-	handleDeleteTicket,
-	isAdmin,
 	setStatus,
 }) => {
+	const [showModal, setShowModal] = useState<boolean>(false);
+	const toggleModal = () => {
+		setShowModal(!showModal);
+	};
+
 	const selectorCaretStyles: StylesConfig<OptionType, false> = {
 		dropdownIndicator: (provided) => ({
 			...provided,
@@ -54,41 +54,61 @@ const TicketStatus: React.FC<TicketStatusProps> = ({
 		}),
 	};
 
+	const handleConfirmDelete = async () => {
+		try {
+			await handleDeleteTicket(ticket._id);
+		} catch (e) {
+			console.log(`Error ${e} while deleting ticket`);
+		}
+		setShowModal(false);
+	};
+
 	return (
 		<div className="ticket-status">
-			<Select
-				isDisabled={!statusBeingEdited}
-				options={statusOptions}
-				styles={{ ...customStyles, ...selectorCaretStyles }}
-				formatOptionLabel={formatOptionLabel}
-				value={statusOptions.find((option) => option.value === status)}
-				onChange={(selectedOption) =>
-					handleUpdateStatus(
-						ticket._id,
-						selectedOption?.value || ticket.status,
-						setStatus
-					)
-				}
-			/>
-			{isAdmin && (
-				<>
-					<button
-						className="status-editing-button"
-						onClick={() => setStatusBeingEdited(!statusBeingEdited)}
-					>
-						{statusBeingEdited ? DONE_SVG : EDIT_SVG}
-					</button>
-
-					<button
-						className="status-editing-button"
-						onClick={() => {
-							handleDeleteTicket(ticket._id, setTickets);
-						}}
-					>
-						{DELETE_SVG}
-					</button>
-				</>
-			)}
+			<div className="select-and-button">
+				<Select
+					isDisabled={!statusBeingEdited}
+					options={statusOptions}
+					styles={{ ...customStyles, ...selectorCaretStyles }}
+					formatOptionLabel={formatOptionLabel}
+					value={statusOptions.find((option) => option.value === status)}
+					onChange={(selectedOption) =>
+						handleUpdateStatus(
+							ticket._id,
+							selectedOption?.value || ticket.status,
+							setStatus
+						)
+					}
+				/>
+				<div
+					className="status-editing-button"
+					onClick={() => setStatusBeingEdited(!statusBeingEdited)}
+				>
+					{statusBeingEdited ? DONE_SVG : EDIT_SVG}
+				</div>
+				<div
+					className="status-editing-button"
+					onClick={() => setShowModal(true)}
+				>
+					{DELETE_SVG}
+				</div>
+			</div>
+			<Modal showModal={showModal} onClose={toggleModal}>
+				<div className="confirmation-dialog">
+					<p>Are you sure you want to delete this ticket?</p>
+					<div className="confirmation-buttons">
+						<button className="secondary-button" onClick={handleConfirmDelete}>
+							Delete
+						</button>
+						<button
+							className="secondary-button"
+							onClick={() => setShowModal(false)}
+						>
+							Cancel
+						</button>
+					</div>
+				</div>
+			</Modal>
 		</div>
 	);
 };

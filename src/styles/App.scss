@@ -179,7 +179,7 @@ $layout-breakpoint-small: 725px;
 .label {
 	font-weight: 600;
 	color: $text-blue;
-	font-size: 1rem;
+	font-size: 0.8rem;
 }
 
 .ticket-list {
@@ -187,7 +187,8 @@ $layout-breakpoint-small: 725px;
 	margin: 0;
 	padding: 0;
 
-	.ticket {
+	.ticket,
+	.summary {
 		position: relative;
 		border-radius: 0.5rem;
 		margin: 1rem;
@@ -196,13 +197,16 @@ $layout-breakpoint-small: 725px;
 		padding: 1rem;
 		color: white;
 		list-style-type: none;
-
+		min-width: 256px;
+		& > .ticket-status {
+			display: flex;
+			justify-content: flex-end;
+		}
 		.ticket-content {
 			color: white;
-			font-size: small;
+			font-size: 0.8rem;
 			word-break: break-word;
 		}
-
 		.ticket-header {
 			position: relative;
 			display: flex;
@@ -214,59 +218,39 @@ $layout-breakpoint-small: 725px;
 				position: absolute;
 				display: flex;
 				height: fit-content;
-
-				.status-editing-button {
-					align-items: center;
-					background: #121212;
-					border-radius: 50%;
-					display: flex;
-					height: 38px;
-					justify-content: center;
-					margin: 0;
-					padding: 0;
-					width: 38px;
-				}
 			}
 		}
 	}
 
-	.comment {
-		margin-bottom: 18px;
-		.date {
-			color: $secondary-text;
-			margin-top: 0;
-		}
-	}
-
-	.comment-form {
-		position: relative;
-
-		.comment-text-area {
-			min-height: 70px;
-			width: calc(100% - 32px);
-			resize: vertical;
-			background: $secondary-bg;
-		}
-
-		button {
-			align-items: center;
-			border-radius: 50%;
+	.summary {
+		.summary-header {
 			display: flex;
-			height: 36px;
-			width: 36px;
-			justify-content: center;
-			padding: 0;
-			position: absolute;
-			right: 0px;
-			bottom: 0px;
+			justify-content: space-between;
+			align-items: center;
+			p {
+				margin-bottom: 0;
+			}
 		}
 	}
 
-	.comment,
-	.comment-text-area {
-		padding: 16px;
-		background: $secondary-bg;
-		border-radius: 5px;
+	.select-and-button {
+		display: flex;
+		flex-direction: row;
+	}
+	.status-editing-button {
+		align-items: center;
+		background-color: #121212;
+		border-radius: 0.5rem;
+		display: flex;
+		width: 27px;
+		height: 27px;
+		justify-content: center;
+		padding: 5px;
+		margin-left: 10px;
+		border: 0.5px solid #121212;
+	}
+	.status-editing-button:hover {
+		border: 0.5px solid white;
 	}
 }
 
@@ -276,6 +260,26 @@ $layout-breakpoint-small: 725px;
 	cursor: pointer;
 	padding: 1rem;
 	border-radius: 1rem;
+}
+
+.truncate-text {
+	display: inline-block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.confirmation-dialog {
+	font-size: 0.8em;
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border-radius: 0.5rem;
 }
 
 @media (max-width: $layout-breakpoint-small) {
@@ -328,12 +332,204 @@ $layout-breakpoint-small: 725px;
 		}
 	}
 
-	// .ticket-list .ticket .ticket-header .ticket-status {
-	// 	right: 1;
-	// }
-
 	.heading-wrapper .admin-panel-heading {
 		font-size: large;
 		width: 90vw;
+	}
+}
+
+.ticket:hover {
+	@include box-shadow(white);
+}
+
+.unfold {
+	padding-top: 8px;
+	padding-left: 5px;
+	padding-right: 5px;
+	width: 20px;
+	margin-right: 10px;
+	border-radius: 0.5rem;
+	border: 0.5px solid #121212;
+}
+
+.unfold:hover {
+	border: 0.5px solid white;
+}
+
+//MODAL
+
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modal {
+	background-color: rgb(36, 36, 36);
+	padding: 20px;
+	width: 40vw;
+	height: 20vh;
+	overflow-y: auto;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+	position: relative;
+}
+.confirmation-dialog {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.confirmation-buttons {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.modal-content {
+	padding: 20px;
+	font-size: 1.2em;
+}
+
+.ticket-page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+.ticket-page-content {
+	display: flex;
+	flex-direction: column;
+	width: 90vw;
+	height: 80vh;
+	background: #17181a;
+	@include box-shadow($border-blue);
+	padding: 1rem;
+	border-radius: 1rem;
+	overflow-x: scroll;
+}
+
+.ticket-status .select-and-button {
+	display: flex;
+	.status-editing-button {
+		margin-left: 10px;
+		align-items: center;
+		background-color: #121212;
+		border-radius: 0.5rem;
+		display: flex;
+		width: 27px;
+		height: 27px;
+		justify-content: center;
+		padding: 5px;
+		border: 0.5px solid #121212;
+	}
+	.status-editing-button:hover {
+		border: 0.5px solid white;
+	}
+}
+
+.comment-text-area {
+	width: 98%;
+	height: 12vh;
+	padding: 1rem;
+}
+
+.comment {
+	margin-bottom: 18px;
+	font-size: small;
+	.date {
+		color: $secondary-text;
+		margin-top: 0;
+	}
+}
+
+.comment-form {
+	position: relative;
+
+	button {
+		align-items: center;
+		border-radius: 50%;
+		display: flex;
+		height: 25px;
+		width: 25px;
+		justify-content: center;
+		padding: 0;
+		position: absolute;
+		right: 0px;
+		bottom: 0px;
+		margin: 10px;
+	}
+}
+
+.comment,
+.comment-text-area {
+	padding: 16px;
+	background: $secondary-bg;
+	border-radius: 5px;
+}
+
+.ticket-page-content-parent {
+	background-color: #121212;
+	padding: 1rem;
+	border-radius: 1rem;
+}
+
+.ticket-content {
+	color: white;
+	font-size: 0.8rem;
+	word-break: break-word;
+}
+
+@media (max-width: 780px) {
+	.modal {
+		width: 80vw;
+		height: 20vh;
+	}
+	.confirmation-dialog {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		p {
+			margin-left: 20px;
+		}
+	}
+	.confirmation-buttons {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+	}
+	.ticket-page-content-parent {
+		width: 90vw;
+	}
+	.ticket-page-content {
+		width: 82vw;
+	}
+	.comment-text-area {
+		width: 70vw;
+		button {
+			margin: 10px;
+		}
+	}
+	.ticket-list {
+		.summary {
+			.summary-header {
+				display: flex;
+				flex-direction: column-reverse;
+				justify-content: start;
+				align-items: start;
+			}
+		}
 	}
 }
