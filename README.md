@@ -8,8 +8,9 @@ Click the link to preview -> https://helpdesk-three-pi.vercel.app/
 
 https://github.com/GarimaB06/Helpdesk/assets/68969765/a5a54921-e34a-4183-a31f-05ba12c6d832
 
+Refactored - Ticket Summary List View: 
 
-
+https://github.com/GarimaB06/Helpdesk/assets/68969765/48496253-b8d2-41f0-946d-3aa37a023ab3
 
 
 ### Features
@@ -28,7 +29,7 @@ https://github.com/GarimaB06/Helpdesk/assets/68969765/a5a54921-e34a-4183-a31f-05
    - **Ticket Summary**: View a summary of all submitted tickets.
    - **Update Ticket Status**: Update the status of each ticket individually.
    - **Detailed Ticket View**: Drill into each ticket to add comments.
-   - **Delete Tickets**: Admins can delete tickets as needed.
+   - **Delete Tickets**: Admins can delete tickets as needed. Confirmation box for added security. 
 
 ### Tech Stack
 
