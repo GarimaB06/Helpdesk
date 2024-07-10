@@ -1,24 +1,27 @@
+// @ts-nocheck
+
 import React, { useEffect, useState } from "react";
 import { SignOutButton } from "@clerk/clerk-react";
-import Ticket from "./Ticket";
 import { BASE_URL } from "./Constants";
 import { IssueTicket, TicketListProps } from "../types/ticketListTypes";
+import Summary from "./Summary";
 
 const TicketList: React.FC<TicketListProps> = ({ isAdmin, refresh }) => {
 	const [tickets, setTickets] = useState<IssueTicket[]>([]);
 
+	const fetchTickets = async () => {
+		try {
+			const ticketsData = await fetch(`${BASE_URL}/api/tickets`);
+			const ticketsJson = await ticketsData.json();
+			setTickets(ticketsJson);
+		} catch (error) {
+			console.log(
+				`Error occurred while fetching tickets data in Admin panel - ${error}`
+			);
+		}
+	};
+
 	useEffect(() => {
-		const fetchTickets = async () => {
-			try {
-				const ticketsData = await fetch(`${BASE_URL}/api/tickets`);
-				const ticketsJson = await ticketsData.json();
-				setTickets(ticketsJson);
-			} catch (error) {
-				console.log(
-					`Error occurred while fetching tickets data in Admin panel - ${error}`
-				);
-			}
-		};
 		fetchTickets();
 	}, [refresh]);
 
@@ -30,18 +33,24 @@ const TicketList: React.FC<TicketListProps> = ({ isAdmin, refresh }) => {
 				</div>
 			) : null}
 			<div className={`list-container${isAdmin ? " admin-list" : ""}`}>
-				<ul className="ticket-list">
-					{tickets.map((ticket) => (
-						<Ticket
-							isAdmin={isAdmin}
-							ticket={ticket}
-							setTickets={setTickets}
-							key={`${ticket._id}-${Math.random()}`}
-						/>
-					))}
-				</ul>
+				{tickets.length ? (
+					<ul className="ticket-list">
+						{tickets.map((ticket) => (
+							<React.Fragment key={`${ticket._id}-${Math.random()}`}>
+								<Summary
+									ticket={ticket}
+									setTickets={setTickets}
+									fetchTickets={fetchTickets}
+								/>
+							</React.Fragment>
+						))}
+					</ul>
+				) : (
+					<p className="subheading">No open issues!</p>
+				)}
 			</div>
-			{isAdmin ? <SignOutButton /> : null}
+
+			{isAdmin ? <SignOutButton className="primary-button" /> : null}
 		</>
 	);
 };

@@ -1,5 +1,3 @@
-import { IssueTicket } from "./ticketListTypes";
-
 export interface OptionType {
 	value: string;
 	label: string;
@@ -8,6 +6,4 @@ export interface OptionType {
 
 export interface TicketProps {
 	isAdmin: boolean;
-	ticket: IssueTicket;
-	setTickets: React.Dispatch<React.SetStateAction<IssueTicket[]>>;
 }
